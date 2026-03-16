@@ -1,0 +1,463 @@
+/* ============================================================
+   themes/2050/styles.css  —  Cyberpunk / Corrupted AI Aesthetic
+   ============================================================ */
+
+/* ===== BASE ===== */
+.era-content-2050 {
+  background: #000000;
+  color: #00ff88;
+  font-family: 'Courier New', 'Consolas', 'Lucida Console', monospace;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== KEYFRAMES ===== */
+
+/* Glitch: skew and clip */
+@keyframes glitch {
+  0%   {
+    clip-path: inset(0% 0% 95% 0%);
+    transform: translateX(-4px);
+  }
+  10%  {
+    clip-path: inset(40% 0% 45% 0%);
+    transform: translateX(4px);
+  }
+  20%  {
+    clip-path: inset(80% 0% 5% 0%);
+    transform: translateX(-3px);
+  }
+  30%  {
+    clip-path: inset(20% 0% 70% 0%);
+    transform: translateX(3px);
+  }
+  40%  {
+    clip-path: inset(60% 0% 30% 0%);
+    transform: translateX(-2px);
+  }
+  50%  {
+    clip-path: inset(10% 0% 85% 0%);
+    transform: translateX(5px) skewX(2deg);
+  }
+  60%  {
+    clip-path: inset(50% 0% 40% 0%);
+    transform: translateX(-5px);
+  }
+  70%  {
+    clip-path: inset(30% 0% 60% 0%);
+    transform: translateX(2px);
+  }
+  80%  {
+    clip-path: inset(70% 0% 20% 0%);
+    transform: translateX(-2px);
+  }
+  90%  {
+    clip-path: inset(5% 0% 90% 0%);
+    transform: translateX(3px);
+  }
+  100% {
+    clip-path: inset(0% 0% 95% 0%);
+    transform: translateX(0);
+  }
+}
+
+/* Chromatic aberration */
+@keyframes chromatic {
+  0%   { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; }
+  25%  { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; }
+  50%  { text-shadow: -3px 0 #00ff00, 3px 0 #ff00ff; }
+  75%  { text-shadow: 3px 0 #ff0000, -3px 0 #0000ff; }
+  100% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; }
+}
+
+/* Warning bar flash */
+@keyframes warning-flash {
+  0%, 49%, 100% { background: #ff0000; color: #000000; }
+  50%, 99%       { background: #880000; color: #ff0000; }
+}
+
+/* Blink 2050 */
+@keyframes blink-2050 {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Noise overlay animation */
+@keyframes noise-move {
+  0%   { background-position: 0 0; }
+  10%  { background-position: -5% -10%; }
+  20%  { background-position: -15% 5%; }
+  30%  { background-position: 7% -25%; }
+  40%  { background-position: 20% 25%; }
+  50%  { background-position: -25% 10%; }
+  60%  { background-position: 15% 5%; }
+  70%  { background-position: 0 15%; }
+  80%  { background-position: 25% 35%; }
+  90%  { background-position: -10% 10%; }
+  100% { background-position: 0 0; }
+}
+
+/* Loading bar animation */
+@keyframes loading-pulse {
+  0%   { width: 10%; background: #00ff88; }
+  30%  { width: 60%; background: #00ffcc; }
+  45%  { width: 45%; background: #ff00ff; }
+  70%  { width: 80%; background: #00ff88; }
+  85%  { width: 55%; background: #ffff00; }
+  100% { width: 10%; background: #00ff88; }
+}
+
+/* Matrix character drop */
+@keyframes matrix-drop {
+  0%   { transform: translateY(-100%); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(200px); opacity: 0; }
+}
+
+/* Popup spam appear */
+@keyframes popup-appear {
+  0%   { transform: scale(0) rotate(-5deg); opacity: 0; }
+  60%  { transform: scale(1.05) rotate(1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Distort block */
+@keyframes distort {
+  0%   { transform: skewX(0deg) translateX(0); }
+  20%  { transform: skewX(1deg) translateX(2px); }
+  40%  { transform: skewX(-1.5deg) translateX(-3px); }
+  60%  { transform: skewX(0.5deg) translateX(1px); }
+  80%  { transform: skewX(-0.5deg) translateX(-1px); }
+  100% { transform: skewX(0deg) translateX(0); }
+}
+
+/* ===== GLITCH TEXT ===== */
+.glitch-text {
+  position: relative;
+  animation: chromatic 3s ease-in-out infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.glitch-text::before {
+  color: #ff0000;
+  animation: glitch 2.5s step-start infinite;
+  clip-path: inset(0% 0% 95% 0%);
+}
+
+.glitch-text::after {
+  color: #00ffff;
+  animation: glitch 3s step-start infinite reverse;
+  clip-path: inset(50% 0% 40% 0%);
+}
+
+/* ===== CHROMATIC TEXT ===== */
+.chromatic-text {
+  animation: chromatic 2s ease-in-out infinite;
+  color: #00ff88;
+}
+
+/* ===== BLINK 2050 ===== */
+.blink-2050 {
+  animation: blink-2050 0.5s step-start infinite;
+}
+
+/* ===== NOISE OVERLAY ===== */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: noise-move 0.3s steps(1) infinite;
+  mix-blend-mode: overlay;
+}
+
+/* ===== WARNING BAR ===== */
+.warning-bar {
+  background: #ff0000;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 5px 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  animation: warning-flash 0.5s step-start infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== GLITCH HEADER ===== */
+.glitch-header {
+  text-align: center;
+  padding: 20px 16px 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.glitch-header h1 {
+  font-size: clamp(24px, 5vw, 48px);
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+.glitch-subtitle {
+  color: #00aaff;
+  font-size: 12px;
+  letter-spacing: 2px;
+  animation: blink-2050 1.5s ease-in-out infinite;
+}
+
+.glitch-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff88, #ff00ff, transparent);
+  margin: 10px 0;
+  animation: chromatic 2s infinite;
+}
+
+/* ===== CONTENT GRID ===== */
+.content-2050-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  grid-template-rows: auto auto;
+  gap: 12px;
+  padding: 10px 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== AI CONTENT BLOCKS ===== */
+.ai-content {
+  background: rgba(0, 255, 136, 0.04);
+  border: 1px solid #00ff8844;
+  border-left: 3px solid #00ff88;
+  padding: 12px;
+  animation: distort 8s ease-in-out infinite;
+}
+
+.ai-label {
+  font-size: 10px;
+  color: #00ff8866;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #00ff8822;
+  padding-bottom: 4px;
+}
+
+.ai-content h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #00ff88;
+}
+
+.corrupted-text {
+  color: #88ffaa;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+/* ===== MATRIX BACKGROUND ===== */
+.matrix-bg {
+  background: #000808;
+  border: 1px solid #00ff8833;
+  overflow: hidden;
+  position: relative;
+  grid-row: span 2;
+}
+
+.matrix-rain-area {
+  position: relative;
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+  font-size: 12px;
+  color: #00ff88;
+}
+
+.matrix-static-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  padding: 8px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #00ff8888;
+  border-top: 1px solid #00ff8833;
+}
+
+.matrix-char {
+  position: absolute;
+  color: #00ff88;
+  font-size: 12px;
+  animation: matrix-drop linear infinite;
+  pointer-events: none;
+  text-shadow: 0 0 8px #00ff88;
+  white-space: nowrap;
+}
+
+/* ===== ERROR BLOCK ===== */
+.error-block {
+  border-left-color: #ff0000;
+  background: rgba(255, 0, 0, 0.04);
+}
+
+.error-dump {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #ff4444;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ===== FEED ITEMS ===== */
+.feed-item-2050 {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid #00ff8818;
+}
+
+.feed-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.feed-meta {
+  color: #00ff8855;
+  font-size: 10px;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ===== POPUP SPAM WINDOWS ===== */
+.popup-spam-window {
+  position: fixed;
+  background: #050510;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 20px rgba(0,255,136,0.4), inset 0 0 20px rgba(0,255,136,0.05);
+  z-index: 99990;
+  width: 260px;
+  font-family: 'Courier New', monospace;
+  animation: popup-appear 0.3s ease-out;
+}
+
+.popup-spam-title {
+  background: linear-gradient(90deg, #00ff88, #00aaff);
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+}
+
+.popup-spam-close {
+  background: #ff0000;
+  border: none;
+  color: #ffffff;
+  font-size: 10px;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.popup-spam-body {
+  padding: 8px 10px;
+  font-size: 11px;
+  color: #00ff88;
+  line-height: 1.5;
+}
+
+.popup-spam-body button {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  background: #00ff8833;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.popup-spam-body button:hover {
+  background: #00ff8866;
+}
+
+/* ===== INFINITE SCROLL 2050 ===== */
+.infinite-scroll-2050 {
+  text-align: center;
+  padding: 20px 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.loading-2050-bar {
+  width: 400px;
+  max-width: 100%;
+  height: 4px;
+  background: #001100;
+  border: 1px solid #00ff8844;
+  margin: 0 auto 8px;
+  overflow: hidden;
+}
+
+.loading-2050-fill {
+  height: 100%;
+  animation: loading-pulse 3s ease-in-out infinite;
+}
+
+.loading-2050-text {
+  font-size: 11px;
+  color: #00ff8866;
+  letter-spacing: 2px;
+  animation: blink-2050 2s ease-in-out infinite;
+}
+
+/* ===== BROKEN LAYOUT CLASS ===== */
+.broken-layout {
+  position: relative;
+  animation: distort 5s ease-in-out infinite;
+}
+
+/* ===== SCROLLBAR ===== */
+.era-content-2050 ::-webkit-scrollbar { width: 6px; }
+.era-content-2050 ::-webkit-scrollbar-track { background: #000; }
+.era-content-2050 ::-webkit-scrollbar-thumb { background: #00ff88; }
+
+/* ===== LINK STYLES ===== */
+.era-content-2050 a { color: #00aaff; }
+.era-content-2050 a:hover { color: #00ffff; text-shadow: 0 0 6px #00ffff; }

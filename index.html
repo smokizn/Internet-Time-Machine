@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internet Time Machine</title>
+  <style>
+    /* ===== BASE RESET & APP SHELL ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    /* ===== ERA SELECTOR BAR (always on top) ===== */
+    #era-selector {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 2px 12px rgba(0,255,136,0.3);
+      font-family: 'Courier New', monospace;
+    }
+
+    #era-selector .era-label {
+      color: #00ff88;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+
+    .era-btn {
+      padding: 5px 16px;
+      border: 1px solid #00ff88;
+      background: transparent;
+      color: #00ff88;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 2px;
+      letter-spacing: 1px;
+    }
+
+    .era-btn:hover {
+      background: rgba(0,255,136,0.15);
+      box-shadow: 0 0 8px rgba(0,255,136,0.5);
+    }
+
+    .era-btn.active {
+      background: #00ff88;
+      color: #0d0d0d;
+      box-shadow: 0 0 12px rgba(0,255,136,0.7);
+    }
+
+    /* ===== BROWSER CHROME BAR ===== */
+    #browser-chrome {
+      position: fixed;
+      top: 37px;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: #d4d0c8;
+      border-bottom: 2px solid #808080;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 36px;
+      transition: all 0.3s;
+    }
+
+    #browser-chrome .chrome-btn {
+      width: 22px;
+      height: 22px;
+      border: 2px outset #ffffff;
+      background: #d4d0c8;
+      cursor: pointer;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    #browser-chrome .chrome-btn:active {
+      border-style: inset;
+    }
+
+    #address-bar {
+      flex: 1;
+      padding: 2px 6px;
+      border: 2px inset #808080;
+      background: #fff;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      color: #000;
+      min-width: 0;
+    }
+
+    #browser-name {
+      font-size: 11px;
+      font-weight: bold;
+      color: #000080;
+      white-space: nowrap;
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+
+    #browser-logo {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ===== LOADING OVERLAY (dial-up) ===== */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #000;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #loading-overlay.visible {
+      display: flex;
+    }
+
+    #loading-overlay pre {
+      color: #00ff00;
+      font-size: 11px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    #loading-progress-bar {
+      width: 300px;
+      height: 18px;
+      border: 1px solid #00ff00;
+      background: #000;
+      margin: 10px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #loading-progress-fill {
+      height: 100%;
+      background: #00ff00;
+      width: 0%;
+      transition: width 0.2s;
+    }
+
+    #loading-status-text {
+      color: #00ff00;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    /* ===== MAIN CONTENT AREA ===== */
+    #app-shell {
+      margin-top: 75px; /* below era-selector + browser-chrome */
+      min-height: calc(100vh - 95px);
+      position: relative;
+    }
+
+    #era-content {
+      min-height: calc(100vh - 115px);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ===== STATUS BAR ===== */
+    #status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: #d4d0c8;
+      border-top: 1px solid #808080;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #000;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 20px;
+    }
+
+    #status-bar .status-section {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #status-bar .status-divider {
+      width: 1px;
+      height: 12px;
+      background: #808080;
+    }
+
+    /* ===== WELCOME SCREEN (before any era selected) ===== */
+    #welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 115px);
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, #0d0d0d 0%, #1a1a2e 50%, #0d0d0d 100%);
+    }
+
+    #welcome-screen h1 {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(24px, 5vw, 48px);
+      color: #00ff88;
+      text-shadow: 0 0 20px rgba(0,255,136,0.5);
+      margin-bottom: 16px;
+      letter-spacing: 3px;
+    }
+
+    #welcome-screen p {
+      font-family: 'Courier New', monospace;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 8px;
+      max-width: 500px;
+    }
+
+    #welcome-screen .arrow-hint {
+      margin-top: 24px;
+      color: #00ff88;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+      animation: pulse-hint 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-hint {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a2e; }
+    ::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- ERA SELECTOR - always visible -->
+  <div id="era-selector">
+    <span class="era-label">⏱ TIME MACHINE</span>
+    <button class="era-btn" data-era="1998">1998</button>
+    <button class="era-btn" data-era="2006">2006</button>
+    <button class="era-btn" data-era="2013">2013</button>
+    <button class="era-btn" data-era="2050">2050</button>
+  </div>
+
+  <!-- BROWSER CHROME BAR -->
+  <div id="browser-chrome">
+    <span id="browser-logo">🌐</span>
+    <div class="chrome-btn" title="Back">◀</div>
+    <div class="chrome-btn" title="Forward">▶</div>
+    <div class="chrome-btn" title="Refresh">↺</div>
+    <div class="chrome-btn" title="Home">⌂</div>
+    <input id="address-bar" type="text" value="http://www.internet-time-machine.com/" readonly />
+    <span id="browser-name">Internet Time Machine</span>
+  </div>
+
+  <!-- DIAL-UP LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <pre id="loading-ascii"></pre>
+    <div id="loading-title">CONNECTING TO INTERNET...</div>
+    <div id="loading-progress-bar">
+      <div id="loading-progress-fill"></div>
+    </div>
+    <div id="loading-status-text">Initializing modem...</div>
+  </div>
+
+  <!-- APP SHELL -->
+  <div id="app-shell">
+    <div id="era-content">
+      <!-- Welcome screen shown before any era is picked -->
+      <div id="welcome-screen">
+        <h1>⏱ INTERNET TIME MACHINE</h1>
+        <p>Step into a time portal and experience the internet as it was—and as it might be.</p>
+        <p>Each era has its own look, feel, sounds, and personality.</p>
+        <div class="arrow-hint">▲ SELECT AN ERA ABOVE TO BEGIN ▲</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div id="status-bar">
+    <div class="status-section" id="status-main">Internet Time Machine v1.0</div>
+    <div class="status-divider"></div>
+    <div class="status-section" id="status-connection">Ready</div>
+    <div class="status-divider"></div>
+    <div class="status-section" id="status-right">No era selected</div>
+  </div>
+
+  <!-- SCRIPTS (order matters) -->
+  <script src="core/router.js"></script>
+  <script src="core/theme-loader.js"></script>
+  <script src="core/ui-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
