@@ -223,7 +223,7 @@ function showVisitorPopup() {
   popup.innerHTML = `
     <div class="visitor-popup-titlebar">
       <span>🎉 Congratulations!</span>
-      <button class="visitor-popup-close" onclick="this.closest('.visitor-popup').remove()">✕</button>
+      <button class="visitor-popup-close">✕</button>
     </div>
     <div class="visitor-popup-body">
       <h2 class="blink">🎉 CONGRATULATIONS! 🎉</h2>
@@ -235,17 +235,22 @@ function showVisitorPopup() {
       <p>You have won a <strong>FREE iPod</strong> and <strong>$1,000,000</strong>!!!</p>
       <p style="font-size:10px; color:#808080;">(Click OK to claim your prize. Credit card required.)</p>
       <div>
-        <button class="netscape-button"
-          onclick="alert('ERROR: Prize unavailable in your area.\\n\\nPlease try again in 1999.'); this.closest(\\'.visitor-popup\\').remove();">
-          🎁 CLAIM PRIZE!
-        </button>
-        <button class="netscape-button"
-          onclick="alert('Are you sure? You might miss out!'); this.closest(\\'.visitor-popup\\').remove();">
-          Cancel
-        </button>
+        <button class="netscape-button popup-claim-btn">🎁 CLAIM PRIZE!</button>
+        <button class="netscape-button popup-cancel-btn">Cancel</button>
       </div>
     </div>
   `;
+
+  popup.querySelector('.visitor-popup-close').addEventListener('click', () => popup.remove());
+  popup.querySelector('.popup-claim-btn').addEventListener('click', () => {
+    alert('ERROR: Prize unavailable in your area.\n\nPlease try again in 1999.');
+    popup.remove();
+  });
+  popup.querySelector('.popup-cancel-btn').addEventListener('click', () => {
+    alert('Are you sure? You might miss out!');
+    popup.remove();
+  });
+
   document.body.appendChild(popup);
 }
 

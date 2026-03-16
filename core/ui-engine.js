@@ -25,11 +25,11 @@ const UIEngine = {
 
         <!-- PAGE HEADER -->
         <div class="page-header-1998">
-          <marquee class="marquee-header" behavior="scroll" direction="left">
+          <div class="marquee-header" role="marquee" aria-live="off"><span>
             ★ WELCOME TO MY WEBSITE!!! ★ &nbsp;&nbsp;&nbsp; YOU ARE VISITOR #1,000,000!!! &nbsp;&nbsp;&nbsp;
             BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 AT 800x600 RESOLUTION &nbsp;&nbsp;&nbsp;
             ★ SIGN MY GUESTBOOK ★ &nbsp;&nbsp;&nbsp; FREE STUFF INSIDE!!! &nbsp;&nbsp;&nbsp;
-          </marquee>
+          </span></div>
           <h1 class="main-title blink">★ WELCOME TO MY WEBSITE!!! ★</h1>
           <p class="subtitle blink-slow">Best viewed in Netscape Navigator 4.0 at 800x600</p>
           <p class="last-updated">Last Updated: November 7, 1998</p>
@@ -185,11 +185,11 @@ const UIEngine = {
       <div class="era-content-2006">
         <!-- MySpace-style header -->
         <div class="myspace-header">
-          <marquee class="marquee-2006" scrollamount="3">
+          <div class="marquee-2006" role="marquee" aria-live="off"><span>
             ♥ myspace.com ♥ &nbsp;|&nbsp; 🎵 Now Playing: Linkin Park - Numb &nbsp;|&nbsp;
             xXx_d4rk_s0ul_xXx's Profile &nbsp;|&nbsp; ♥ Add Me ♥ &nbsp;|&nbsp;
             emo 4 lyfe &nbsp;|&nbsp; i &lt;3 music &nbsp;|&nbsp;
-          </marquee>
+          </span></div>
         </div>
 
         <div class="profile-layout">

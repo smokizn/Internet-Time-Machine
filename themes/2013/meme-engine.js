@@ -261,11 +261,11 @@ function renderComments() {
         </div>
         <div class="comment-text">${comment.text}</div>
         <div class="comment-actions">
-          <span onclick="this.textContent = 'permalinked!'">permalink</span>
+          <span class="ca-permalink">permalink</span>
           <span>embed</span>
-          <span onclick="this.textContent = 'saved!'">save</span>
-          <span onclick="this.textContent = 'reported! jk'">report</span>
-          <span onclick="this.textContent = 'gifted!'">give gold</span>
+          <span class="ca-save">save</span>
+          <span class="ca-report">report</span>
+          <span class="ca-gold">give gold</span>
         </div>
         ${comment.replies.map(r => `
           <div class="comment-card" style="margin-top:6px; border-left-color:#d8d8d8;">
@@ -281,6 +281,12 @@ function renderComments() {
           </div>
         `).join('')}
       `;
+
+      div.querySelector('.ca-permalink').addEventListener('click', function() { this.textContent = 'permalinked!'; });
+      div.querySelector('.ca-save').addEventListener('click', function() { this.textContent = 'saved!'; });
+      div.querySelector('.ca-report').addEventListener('click', function() { this.textContent = 'reported! jk'; });
+      div.querySelector('.ca-gold').addEventListener('click', function() { this.textContent = 'gifted!'; });
+
       section.appendChild(div);
     }, i * 300);
     _2013_timeouts.push(tid);

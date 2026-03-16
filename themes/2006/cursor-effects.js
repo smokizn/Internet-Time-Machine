@@ -253,7 +253,7 @@ function showWelcomePopup2006() {
   popup.innerHTML = `
     <div class="popup-2006-title">
       <span>✦ xXx_d4rk_s0ul_xXx ✦</span>
-      <button class="popup-2006-close" onclick="this.closest('.popup-2006').remove()">✕</button>
+      <button class="popup-2006-close">✕</button>
     </div>
     <div class="popup-2006-body">
       <h2>OMG HI!!!</h2>
@@ -266,15 +266,20 @@ function showWelcomePopup2006() {
         please sign my guestbook and leave a comment!!!<br/>
         add me as a friend if u think im kewl lol 😎
       </p>
-      <button class="music-btn" style="margin:4px;"
-        onclick="window.playMelody && window.playMelody()">
+      <button class="music-btn popup-play-song" style="margin:4px;">
         🎵 Play My Song
       </button>
-      <button class="music-btn" style="margin:4px;"
-        onclick="this.closest('.popup-2006').remove()">
+      <button class="music-btn popup-close-bye" style="margin:4px;">
         💖 ok omg bye!
       </button>
     </div>
   `;
+
+  popup.querySelector('.popup-2006-close').addEventListener('click', () => popup.remove());
+  popup.querySelector('.popup-play-song').addEventListener('click', () => {
+    if (typeof window.playMelody === 'function') window.playMelody();
+  });
+  popup.querySelector('.popup-close-bye').addEventListener('click', () => popup.remove());
+
   document.body.appendChild(popup);
 }

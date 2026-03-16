@@ -281,13 +281,19 @@ function spawnPopupSpam() {
   popup.innerHTML = `
     <div class="popup-spam-title">
       <span>${msg.title}</span>
-      <button class="popup-spam-close" onclick="this.closest('.popup-spam-window').remove(); window._2050_popupCount = Math.max(0, (window._2050_popupCount||1)-1);">✕</button>
+      <button class="popup-spam-close">✕</button>
     </div>
     <div class="popup-spam-body">
       <pre style="white-space:pre-wrap; font-size:10px; margin:0;">${msg.msg}</pre>
-      <button onclick="this.closest('.popup-spam-window').remove();">${msg.btn}</button>
+      <button class="popup-spam-action">${msg.btn}</button>
     </div>
   `;
+
+  popup.querySelector('.popup-spam-close').addEventListener('click', () => {
+    popup.remove();
+    _2050_popupCount = Math.max(0, _2050_popupCount - 1);
+  });
+  popup.querySelector('.popup-spam-action').addEventListener('click', () => popup.remove());
 
   document.body.appendChild(popup);
 }

@@ -83,6 +83,15 @@
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-2006 span {
+  display: inline-block;
+  animation: scrollMarquee 16s linear infinite;
+  padding-left: 100%;
 }
 
 /* ===== PROFILE LAYOUT ===== */
