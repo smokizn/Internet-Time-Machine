@@ -1,0 +1,529 @@
+/* ============================================================
+   themes/1998/styles.css  —  Netscape-era GeoCities aesthetic
+   ============================================================ */
+
+/* ===== BODY & PAGE BACKGROUND ===== */
+.era-content-1998 {
+  background-color: #c0c0c0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.03) 2px,
+    rgba(255,255,255,0.03) 4px
+  );
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Bradley Hand ITC', cursive, 'Times New Roman', serif;
+  color: #000080;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+@keyframes blink {
+  0%, 100% { visibility: visible; }
+  49%       { visibility: visible; }
+  50%       { visibility: hidden; }
+}
+
+@keyframes blink-slow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes construction-stripe {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes star-spin2 {
+  0%   { transform: rotate(0deg) scale(1); color: #ff0000; }
+  25%  { transform: rotate(90deg) scale(1.2); color: #0000ff; }
+  50%  { transform: rotate(180deg) scale(1); color: #00aa00; }
+  75%  { transform: rotate(270deg) scale(1.2); color: #ff6600; }
+  100% { transform: rotate(360deg) scale(1); color: #ff0000; }
+}
+
+@keyframes face-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95%            { transform: scaleY(0.05); }
+}
+
+@keyframes counter-pulse {
+  0%, 100% { box-shadow: inset 0 0 4px rgba(0,0,0,0.6); }
+  50%       { box-shadow: inset 0 0 8px rgba(0,255,0,0.6); }
+}
+
+/* ===== BLINK CLASSES ===== */
+.blink {
+  animation: blink 1s step-start infinite;
+}
+
+.blink-slow {
+  animation: blink-slow 2s ease-in-out infinite;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header-1998 {
+  background: linear-gradient(90deg, #000080 0%, #0000cc 40%, #000080 100%);
+  color: #ffffff;
+  text-align: center;
+  padding: 12px 8px 8px;
+  border-bottom: 4px solid #ffff00;
+}
+
+.marquee-header {
+  display: block;
+  background: #000080;
+  color: #00ffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 0;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ffff00;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-header span {
+  display: inline-block;
+  animation: marquee 18s linear infinite;
+  padding-left: 100%;
+}
+
+.main-title {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 32px;
+  color: #ffff00;
+  text-shadow: 3px 3px 0 #ff0000, -1px -1px 0 #000;
+  margin: 10px 0 6px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #00ffff;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.last-updated {
+  color: #c0c0c0;
+  font-size: 11px;
+}
+
+/* ===== MAIN TABLE LAYOUT ===== */
+.table-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+.col-left {
+  width: 170px;
+  min-width: 170px;
+  flex-shrink: 0;
+  padding-right: 8px;
+}
+
+.col-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ===== LEFT COLUMN BOXES ===== */
+.nav-box,
+.hit-counter-box,
+.web-ring-box,
+.awards-box {
+  background: #d4d0c8;
+  border: 2px solid #808080;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  margin-bottom: 8px;
+  padding: 6px;
+}
+
+.nav-title {
+  background: #000080;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 5px;
+  text-align: center;
+  margin: -6px -6px 6px -6px;
+  letter-spacing: 1px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-list li {
+  border-bottom: 1px dashed #808080;
+}
+
+.nav-list a {
+  display: block;
+  color: #000080;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 3px 2px;
+}
+
+.nav-list a:hover {
+  background: #000080;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ===== HIT COUNTER ===== */
+.hit-counter-label {
+  font-size: 10px;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.hit-counter {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: #00ff00;
+  background: #000000;
+  border: 2px inset #808080;
+  padding: 4px 8px;
+  text-align: center;
+  letter-spacing: 3px;
+  animation: counter-pulse 2s ease-in-out infinite;
+}
+
+/* ===== ANIMATED GIF PLACEHOLDERS ===== */
+.animated-gif {
+  display: block;
+  margin: 4px auto;
+}
+
+.star-spin {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #ffff00 0%, #ff6600 60%, transparent 70%);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.star-spin2 {
+  font-size: 20px;
+  text-align: center;
+  animation: star-spin2 2s linear infinite;
+  color: #ff0000;
+}
+
+.star-spin3 {
+  font-size: 10px;
+  color: #ff0000;
+  animation: star-spin2 1.5s linear infinite;
+  padding: 4px;
+}
+
+.face-blink {
+  animation: face-blink 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: #ffffcc;
+  border: 2px solid #ffcc00;
+}
+
+.award-gif {
+  width: 36px;
+  height: 36px;
+  margin: 4px auto;
+}
+
+/* ===== UNDER CONSTRUCTION ===== */
+.under-construction {
+  background: #ffff00;
+  color: #000000;
+  border: 4px solid;
+  border-image: repeating-linear-gradient(
+    45deg,
+    #000000 0px, #000000 10px,
+    #ffcc00 10px, #ffcc00 20px
+  ) 4;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  animation: construction-stripe 0.5s linear infinite;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #ffff00,
+    #ffff00 10px,
+    #ffcc00 10px,
+    #ffcc00 20px
+  );
+}
+
+.under-con-icon {
+  font-size: 18px;
+}
+
+/* ===== CONTENT BOXES ===== */
+.content-box {
+  background: #ffffff;
+  border: 2px solid #808080;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.section-title {
+  background: linear-gradient(90deg, #000080, #0000cc);
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Comic Sans MS', cursive;
+  padding: 4px 8px;
+  margin: -8px -8px 8px -8px;
+  border-bottom: 2px solid #ffff00;
+}
+
+/* ===== PROFILE TABLE ===== */
+.profile-table {
+  width: 100%;
+  background: #fffff0;
+  border: 1px solid #c0c0c0;
+  font-size: 12px;
+}
+
+.profile-pic-cell {
+  width: 90px;
+  text-align: center;
+  vertical-align: top;
+  padding: 6px;
+  border-right: 1px dashed #c0c0c0;
+  background: #ffffee;
+}
+
+.profile-info-cell {
+  padding: 6px;
+  vertical-align: top;
+  line-height: 1.8;
+}
+
+.profile-info-cell p {
+  font-size: 12px;
+}
+
+/* ===== FAVORITES LIST ===== */
+.favorites-list {
+  list-style: none;
+  padding: 0;
+}
+
+.favorites-list li {
+  padding: 3px 0;
+  border-bottom: 1px dotted #c0c0c0;
+  font-size: 12px;
+}
+
+/* ===== GUESTBOOK ===== */
+.guestbook {
+  background: #fffff0;
+  border: 1px inset #808080;
+  padding: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.guestbook-entry {
+  border-bottom: 1px dashed #c0c0c0;
+  padding: 5px 0;
+}
+
+.gb-name {
+  color: #000080;
+  font-size: 12px;
+}
+
+.gb-date {
+  color: #808080;
+  font-size: 10px;
+  margin-left: 8px;
+}
+
+.gb-msg {
+  font-size: 12px;
+  color: #000000;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* ===== NETSCAPE BUTTONS ===== */
+.netscape-button {
+  background: #d4d0c8;
+  border: 2px outset #ffffff;
+  color: #000000;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  padding: 3px 10px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.netscape-button:active {
+  border-style: inset;
+}
+
+.netscape-button:hover {
+  background: #c0beb6;
+}
+
+/* ===== COOL LINKS ===== */
+.cool-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.cool-link-btn {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* ===== LINK STYLES ===== */
+a:link    { color: #0000ff; }
+a:visited { color: #800080; }
+a:hover   { color: #ff0000; text-decoration: underline; }
+a:active  { color: #ff0000; }
+
+/* ===== PAGE FOOTER ===== */
+.page-footer-1998 {
+  background: #000080;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  border-top: 4px solid #ffff00;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.footer-badges {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.footer-badge {
+  background: #d4d0c8;
+  color: #000080;
+  border: 2px outset #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 6px;
+}
+
+/* ===== VISITOR POPUP ===== */
+.visitor-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #d4d0c8;
+  border: 3px outset #ffffff;
+  z-index: 99998;
+  width: 320px;
+  box-shadow: 4px 4px 0 #000;
+  font-family: 'Arial', sans-serif;
+}
+
+.visitor-popup-titlebar {
+  background: linear-gradient(90deg, #000080, #0080ff);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+}
+
+.visitor-popup-close {
+  background: #d4d0c8;
+  border: 2px outset #ffffff;
+  color: #000;
+  font-size: 10px;
+  cursor: pointer;
+  width: 16px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.visitor-popup-body {
+  padding: 12px;
+  text-align: center;
+}
+
+.visitor-popup-body h2 {
+  color: #ff0000;
+  font-size: 18px;
+  animation: blink 0.5s step-start infinite;
+}
+
+.visitor-popup-body p {
+  font-size: 12px;
+  margin: 6px 0;
+}
+
+.visitor-popup-body button {
+  margin: 4px;
+}
+
+/* ===== STATUS BAR OVERRIDE FOR 1998 ===== */
+.status-bar-1998 {
+  background: #d4d0c8;
+  border-top: 1px solid #808080;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: #000000;
+}
+
+/* ===== SCROLLBAR (IE style) ===== */
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  background: #d4d0c8;
+}
+::-webkit-scrollbar-thumb {
+  background: #a0a0a0;
+  border: 1px outset #d4d0c8;
+}
+::-webkit-scrollbar-button {
+  background: #d4d0c8;
+  border: 1px outset #d4d0c8;
+  height: 16px;
+}

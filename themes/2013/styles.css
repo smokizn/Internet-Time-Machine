@@ -1,0 +1,518 @@
+/* ============================================================
+   themes/2013/styles.css  —  Flat Design / Early Reddit Aesthetic
+   ============================================================ */
+
+/* ===== BASE ===== */
+.era-content-2013 {
+  background-color: #f6f7f8;
+  color: #222222;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes spin-loader {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(-20px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes vote-flash {
+  0%   { background: #ff6314; color: #fff; }
+  100% { background: transparent; color: inherit; }
+}
+
+@keyframes pop-in {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== REDDIT TOP BAR ===== */
+.reddit-topbar {
+  background: #5f99cf;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 36px;
+  border-bottom: 1px solid #5585b0;
+  flex-wrap: wrap;
+}
+
+.reddit-logo {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.reddit-nav {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.reddit-nav-link {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.reddit-nav-link:hover {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+.reddit-nav-link.active-nav {
+  color: #ffffff;
+  font-weight: bold;
+  background: rgba(0,0,0,0.1);
+}
+
+.reddit-user {
+  margin-left: auto;
+  color: rgba(255,255,255,0.85);
+  font-size: 11px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.karma-badge {
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.content-2013-layout {
+  display: flex;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 16px auto;
+  padding: 0 12px;
+}
+
+/* ===== MAIN FEED ===== */
+.main-feed {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ===== POST CARDS ===== */
+.post-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-left: 4px solid transparent;
+  display: flex;
+  gap: 0;
+  margin-bottom: 8px;
+  transition: border-left-color 0.2s;
+  animation: slide-in 0.3s ease-out;
+}
+
+.post-card:hover {
+  border-left-color: #ff6314;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.post-text-card {
+  padding: 8px 8px 8px 0;
+}
+
+/* ===== VOTE COLUMN ===== */
+.vote-col {
+  width: 40px;
+  min-width: 40px;
+  background: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+  gap: 2px;
+}
+
+.vote-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #c6c6c6;
+  padding: 2px 4px;
+  border-radius: 2px;
+  transition: color 0.1s;
+  line-height: 1;
+}
+
+.vote-btn:hover {
+  color: #ff6314;
+  background: rgba(255,99,20,0.1);
+}
+
+.vote-btn.upvote-btn.voted {
+  color: #ff6314;
+  animation: vote-flash 0.3s ease-out;
+}
+
+.vote-btn.downvote-btn.voted {
+  color: #7193ff;
+}
+
+.vote-count {
+  font-size: 11px;
+  font-weight: bold;
+  color: #555555;
+  text-align: center;
+}
+
+/* ===== POST CONTENT ===== */
+.post-content {
+  display: flex;
+  flex: 1;
+  padding: 6px 8px;
+  gap: 10px;
+  min-width: 0;
+}
+
+.post-thumbnail {
+  flex-shrink: 0;
+  width: 130px;
+}
+
+.post-info {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.post-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #222222;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.post-meta {
+  font-size: 11px;
+  color: #888888;
+  margin-bottom: 6px;
+}
+
+.post-user {
+  color: #5f99cf;
+  font-weight: bold;
+}
+
+.subreddit-link {
+  color: #5f99cf;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.subreddit-link:hover {
+  text-decoration: underline;
+}
+
+.post-stats {
+  color: #999999;
+}
+
+/* ===== MEME BOXES ===== */
+.meme-box {
+  width: 130px;
+  background: #1a1a1a;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.meme-text {
+  font-family: Impact, 'Arial Black', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+  line-height: 1.2;
+}
+
+.meme-top { margin-bottom: 2px; }
+.meme-bottom { margin-top: 2px; }
+
+.meme-face {
+  font-size: 32px;
+  padding: 4px;
+  display: block;
+}
+
+/* ===== RAGE COMIC BOXES ===== */
+.rage-box {
+  width: 130px;
+  background: #fff;
+  border: 2px solid #cccccc;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.rage-panel {
+  border: 1px solid #eeeeee;
+  padding: 4px;
+  text-align: center;
+  background: #fafafa;
+}
+
+.rage-face {
+  font-size: 24px;
+  display: block;
+}
+
+.rage-caption {
+  font-size: 8px;
+  font-family: Impact, Arial, sans-serif;
+  font-weight: bold;
+  color: #333333;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ===== TAGS ===== */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.tag {
+  background: #e8e8e8;
+  color: #555555;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: lowercase;
+}
+
+/* ===== LOADING SPINNER ===== */
+.loading-memes {
+  text-align: center;
+  padding: 20px;
+  color: #888888;
+  font-size: 13px;
+}
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #e8e8e8;
+  border-top-color: #5f99cf;
+  border-radius: 50%;
+  animation: spin-loader 0.8s linear infinite;
+  margin: 0 auto 8px;
+}
+
+/* ===== COMMENT SECTION ===== */
+.comment-section-2013 {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.comment-section-title {
+  font-size: 13px;
+  color: #555555;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 6px;
+}
+
+.comment-card {
+  border-left: 2px solid #eeeeee;
+  padding: 6px 0 6px 10px;
+  margin-bottom: 10px;
+  animation: pop-in 0.3s ease-out;
+}
+
+.comment-card:hover {
+  border-left-color: #5f99cf;
+}
+
+.comment-author {
+  color: #5f99cf;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.comment-karma {
+  color: #ff6314;
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+.comment-text {
+  color: #333333;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.comment-actions {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #888888;
+  display: flex;
+  gap: 8px;
+}
+
+.comment-actions span {
+  cursor: pointer;
+}
+
+.comment-actions span:hover {
+  color: #555555;
+  text-decoration: underline;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar-2013 {
+  width: 260px;
+  min-width: 260px;
+  flex-shrink: 0;
+}
+
+.sidebar-widget {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.widget-title {
+  background: #5f99cf;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.widget-desc {
+  padding: 10px;
+  font-size: 12px;
+  color: #555555;
+  line-height: 1.5;
+}
+
+.widget-stats {
+  display: flex;
+  gap: 0;
+  padding: 0 10px 10px;
+}
+
+.widget-stats > div {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: #333333;
+}
+
+/* ===== FLAT BUTTONS ===== */
+.flat-btn {
+  display: block;
+  width: calc(100% - 20px);
+  margin: 0 10px 10px;
+  padding: 7px;
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: filter 0.1s;
+}
+
+.flat-btn:hover { filter: brightness(0.9); }
+.flat-btn:active { filter: brightness(0.8); }
+
+.flat-btn-primary {
+  background: #ff6314;
+  color: #ffffff;
+}
+
+/* ===== TRENDING LIST ===== */
+.trending-list {
+  list-style: none;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.trending-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eeeeee;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trend-rank {
+  background: #5f99cf;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ===== MEME OF THE DAY ===== */
+.motd-box {
+  padding: 10px;
+  background: #1a1a1a;
+  text-align: center;
+}
+
+/* ===== RULES LIST ===== */
+.rules-list {
+  padding: 8px 10px 8px 28px;
+  font-size: 12px;
+  color: #555555;
+}
+
+.rules-list li {
+  padding: 3px 0;
+  border-bottom: 1px dotted #eeeeee;
+}
+
+/* ===== LINK STYLES ===== */
+.era-content-2013 a {
+  color: #5f99cf;
+  text-decoration: none;
+}
+
+.era-content-2013 a:hover {
+  text-decoration: underline;
+}
